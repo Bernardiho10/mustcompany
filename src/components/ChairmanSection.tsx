@@ -141,11 +141,17 @@ const ChairmanImageContainer = styled(motion.div)`
 `;
 
 const ChairmanImageBackground = styled.div`
-  width: 800px;
+  width: 900px;
   height: 400px;
   background-color: #D0DEF0;
-  
   border-radius: 200px;
+
+  
+
+  @media (max-width: 768px) {
+    width: 800px;
+    height: 200px;
+  }
 `;
 
 const ChairmanImageMask = styled.div`
@@ -157,14 +163,13 @@ const ChairmanImageMask = styled.div`
   overflow: hidden;
   clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%);
 
-  @media (max-width: 1024px) {
-    top: 30px;
-    left: 30px;
-  }
+  
 
   @media (max-width: 768px) {
-    top: 20px;
-    left: 20px;
+        top: -50px;
+        left: 140px;
+        width: 250px;
+        height: 250px;
   }
 `;
 

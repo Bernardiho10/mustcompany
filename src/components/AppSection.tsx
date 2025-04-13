@@ -5,9 +5,31 @@ import { ChevronRightIcon, DownloadIcon, BellIcon } from './IconComponents';
 import appLogoImage from '../assets/images/icon_mobile.png';
 import appIcon from '../assets/images/appicon.png';
 import { appScreenBackgroundImage } from '../assets/images';
-import appScreenBgImage from '../assets/images/app-screen-background.jpg';
 import dailyContentImage from '../assets/images/daily-content-image.jpg';
 import { nowContentIcon } from '../assets/images';
+import icon_pen from '../assets/images/Icon_pen.png';
+
+const PaginationOverlay = styled.div`
+  position: absolute;
+  bottom: 28px;
+  right: -2px;
+  background: rgba(0, 0, 0, 0.6); // #00000099
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+  @media (max-width: 768px) {
+    left: 85px;
+    bottom: 28px;
+  }
+`;
+
 
 const SectionContainer = styled.section`
   width: 100%;
@@ -276,6 +298,7 @@ const AppScreenContentImage = styled.img`
   width: 100%;
   height: 180px;
   object-fit: cover;
+  border-radius: 10px;
 
   @media (max-width: 768px) {
     height: 150px;
@@ -284,6 +307,28 @@ const AppScreenContentImage = styled.img`
 
 const AppScreenContentDetails = styled.div`
   padding: 18px 16px;
+  position: relative;
+`;
+
+const AppScreenContentDetailsImage = styled.img`
+  
+`;
+
+const AppScreenContentDetailsImageContainer = styled.div`
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 60.28px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  height: 60.28px;
+  background-color: #FFFFFF;
+  border-radius: 99px;
+  border: 1px solid #9CA3AF;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 `;
 
 const AppScreenContentHeader = styled.div`
@@ -325,7 +370,7 @@ const AppScreenContentText = styled.p`
 `;
 
 const AppFooter = styled.div`
-  padding: 32px 24px;
+  padding: 32px 15px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85));
   position: absolute;
   bottom: 403px;
@@ -336,6 +381,10 @@ const AppFooter = styled.div`
   gap: 14px;
   z-index: 5;
   backdrop-filter: blur(2px);
+
+  @media (max-width: 768px) {
+    bottom: 355px;
+  }
 `;
 
 const AppFooterTitle = styled.h3`
@@ -348,62 +397,13 @@ const AppFooterTitle = styled.h3`
 `;
 
 const AppFooterDescription = styled.p`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.9);
 `;
 
-const AppNavigationBar = styled.div`
-  width: 100%;
-  height: 65px;
-  background-color: var(--color-bg);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid #EEEEEE;
-  padding: 6px 8px 0;
-  z-index: 8;
-`;
 
-const AppNavigationItems = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 0 12px;
-`;
-
-interface AppNavigationItemProps {
-  isActive?: boolean;
-}
-
-const AppNavigationItem = styled.div<AppNavigationItemProps>`
-  font-size: 11px;
-  font-weight: ${props => props.isActive ? 600 : 400};
-  line-height: 1.4;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: ${props => props.isActive ? 'var(--color-primary)' : '#9CA3AF'};
-  text-align: center;
-  padding-bottom: ${props => props.isActive ? '2px' : '0'};
-  border-bottom: ${props => props.isActive ? '2px solid var(--color-primary)' : 'none'};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  
-  &::before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    background-color: ${props => props.isActive ? 'rgba(var(--color-primary-rgb), 0.1)' : 'transparent'};
-    margin-bottom: 2px;
-  }
-`;
 
 const StyledDownloadIcon = styled(DownloadIcon)`
   margin-left: 8px;
@@ -411,8 +411,8 @@ const StyledDownloadIcon = styled(DownloadIcon)`
 
 const StyledBellIcon = styled(BellIcon)`
   color: white;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 `;
 
 const NotificationBadgeWrapper = styled.div`
@@ -438,42 +438,9 @@ const NotificationBadge = styled.div`
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
 `;
 
-const StatusBar = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 44px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 16px;
-  z-index: 10;
-`;
-
-const StatusBarTime = styled.div`
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-`;
-
-const StatusBarIcons = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-`;
-
-const StatusBarIcon = styled.div`
-  width: 16px;
-  height: 16px;
-  background-color: white;
-  border-radius: 50%;
-`;
-
 const AppMenuBar = styled.div`
   position: absolute;
-  top: 44px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 60px;
@@ -566,97 +533,16 @@ const BurgerIcon = styled.div`
   }
 `;
 
-const NotificationIcon = styled.div`
-  width: 20px;
-  height: 20px;
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 14px;
-    border: 2px solid white;
-    border-radius: 10px 10px 3px 3px;
-    top: 0;
-    left: 2px;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background-color: #FF4D4F;
-    border-radius: 50%;
-    top: -2px;
-    right: 0;
-    box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.8);
-  }
-  
-  @media (max-width: 768px) {
-    width: 18px;
-    height: 18px;
-    
-    &::before {
-      width: 14px;
-      height: 12px;
-    }
-    
-    &::after {
-      width: 5px;
-      height: 5px;
-    }
-  }
-`;
-
-const PenIcon = styled.div`
-  width: 20px;
-  height: 20px;
-  position: relative;
-  transform: rotate(-45deg);
-  
-  
-  
-  @media (max-width: 768px) {
-    width: 18px;
-    height: 18px;
-    
-    &::before {
-      width: 10px;
-      height: 2px;
-      top: 8px;
-      left: 4px;
-    }
-    
-    &::after {
-      width: 6px;
-      height: 10px;
-      top: 2px;
-      left: 8px;
-    }
-  }
-`;
-
-const ProfileIcon = styled.div`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #F8F9FB;
-  border: 2px solid white;
-`;
-
 const MenuTabs = styled.div`
   position: absolute;
-  top: 104px;
+  top: 60px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 0 16px;
-  gap: 24px;
+  gap: 20px;
   background-color: transparent;
   z-index: 8;
   overflow-x: auto;
@@ -792,15 +678,7 @@ const AppSection: React.FC = () => {
               borderRadius: '22px 22px 0 0',
               zIndex: 6
             }}></div>
-            
-            {/* <StatusBar>
-              <StatusBarTime>9:41</StatusBarTime>
-              <StatusBarIcons>
-                <StatusBarIcon />
-                <StatusBarIcon />
-                <StatusBarIcon />
-              </StatusBarIcons>
-            </StatusBar> */}
+          
             
             <AppMenuBar>
               <AppMenuLeft>
@@ -850,6 +728,9 @@ const AppSection: React.FC = () => {
                 <AppScreenContentImage src={dailyContentImage} alt="오늘의 컨텐츠" />
                 <AppScreenContentDetails>
                   <AppScreenContentHeader>
+                    <AppScreenContentDetailsImageContainer>
+                      <AppScreenContentDetailsImage src={icon_pen} alt="오늘의 컨텐츠" />
+                    </AppScreenContentDetailsImageContainer>
                     <AppScreenContentTitle>명언의 발견</AppScreenContentTitle>
                   </AppScreenContentHeader>
                   <AppScreenContentText>
@@ -868,18 +749,17 @@ const AppSection: React.FC = () => {
             </AppFooterTitle>
             <AppFooterDescription>
               테마여행 - 별과 인문학이 함께하는 아름다운 경험
+            
             </AppFooterDescription>
+            <PaginationOverlay>
+                <span>1</span>
+            <span>|</span>
+              <span>3</span>
+            <ChevronRightIcon size={16} />
+            </PaginationOverlay>
           </AppFooter>
 
-          {/* <AppNavigationBar>
-            <AppNavigationItems>
-              <AppNavigationItem isActive>NOW</AppNavigationItem>
-              <AppNavigationItem>커뮤니티</AppNavigationItem>
-              <AppNavigationItem>문화•행사</AppNavigationItem>
-              <AppNavigationItem>서포터</AppNavigationItem>
-              <AppNavigationItem>멤버십</AppNavigationItem>
-            </AppNavigationItems>
-          </AppNavigationBar> */}
+          
         </AppPhoneFrame>
       </AppScreenContainer>
     </SectionContainer>

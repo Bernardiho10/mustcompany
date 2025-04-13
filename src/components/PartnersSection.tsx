@@ -62,7 +62,7 @@ const ArrowButtonContainer = styled.div`
   gap: 12px;
 
   @media (max-width: 1024px) {
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 `;
 
@@ -113,14 +113,14 @@ const PartnersSlider = styled.div`
 const PartnersTrack = styled(motion.div)`
   display: flex;
   gap: 60px;
-  position: absolute;
   left: 0;
   top: 0;
   width: max-content;
-  height: 100%;
   
   @media (max-width: 768px) {
     gap: 40px;
+    position: unset;
+    height: unset;
   }
 `;
 
